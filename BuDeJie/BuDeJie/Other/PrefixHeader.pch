@@ -1,0 +1,79 @@
+//
+//  PrefixHeader.pch
+//  BuDeJie
+//
+//  Created by wlw0003 on 2017/5/31.
+//  Copyright © 2017年 MHW. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+
+#import <UIKit/UIKit.h>
+#import "BaseHelp.h"
+#import "BaseAbstractController.h"
+#import "UIView+Ext.h"
+
+/// ----------------------- 输出 ----------------------------  ///
+//日志输出
+#ifdef DEBUG // 开发阶段-DEBUG阶段:使用Log
+#define WLWLog(...) NSLog(__VA_ARGS__)
+#define SDKLOG(fmt,...)     NSLog(fmt,##__VA_ARGS__)
+#else // 发布阶段-上线阶段:移除Log
+#define WLWLog(...)
+#define SDKLOG(fmt,...)
+#endif
+
+
+/// ----------------------- 颜色 ----------------------------  ///
+// 颜色
+#define WLWARGBColor(a, r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)/255.0]
+#define WLWColor(r, g, b) WLWARGBColor(255, (r), (g), (b))
+#define WLWGrayColor(v) WLWColor((v), (v), (v))
+
+#define WLWCommonOrangeColor WLWColor(255, 140, 0)
+
+
+#define WLWRandomColor WLWColor(arc4random_uniform(255), arc4random_uniform(255), arc4random_uniform(255))
+#define UIColorFromRGB(rgbValue)                            \
+[UIColor                                                    \
+colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0   \
+green:((float)((rgbValue & 0xFF00) >> 8))/255.0             \
+blue:((float)(rgbValue & 0xFF))/255.0                       \
+alpha:1.0]
+#define WLWFont(size) [UIFont systemFontOfSize:size]
+// 通用背景色
+#define WLWCommonBgColor UIColorFromRGB(0xf2f2f2)
+
+// 通用背景色
+#define WLWCommonSpareLineColor UIColorFromRGB(0xe2e2e2)
+
+
+// 标签的背景颜色
+#define WLWTagBgColor WLWColor(70, 142, 243)
+
+#define MainColor UIColorFromRGB(0xFF1446) 
+
+
+
+/// ----------------------- 其他设置 ----------------------------  ///
+// 弱引用
+#define WLWWeakSelf __weak typeof(self) weakSelf = self;
+
+//keyWindow
+#define WLWKeyWindow [UIApplication sharedApplication].keyWindow
+
+// 将数据写到桌面的plist
+#define WLWWriteToPlist(data, filename) [data writeToFile:[NSString stringWithFormat:@"/Users/lovepeijun/Desktop/%@.plist", filename] atomically:YES];
+
+/** 屏幕高 */
+#define WLWScreenH [UIScreen mainScreen].bounds.size.height
+/** 屏幕宽 */
+#define WLWScreenW [UIScreen mainScreen].bounds.size.width
+
+
+#import "AppDelegate.h"
+#define APP_DELEGATE ((AppDelegate *)[UIApplication sharedApplication].delegate)
+
+#endif /* PrefixHeader_pch */
